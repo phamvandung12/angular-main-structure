@@ -1,0 +1,142 @@
+<header class="header-part px-5x2">
+  <div nz-row>
+    <div nz-col nzSpan="4" nzSm="8">
+      <a href="../"><img alt="HCM-UTE Full Logo" class="w-full logo-size hide-logo-mobile"
+          src="assets/img/logo/ute_bdrp.png"></a>
+      <a href="../"><img alt="HCM-UTE Logo" class="w-full logo-mobile"
+          src="assets/img/logo/ute_logo.png"></a>
+    </div>
+    <div nz-col nzSpan="20" nzSm="16" class="text-right m-auto">
+      <button nz-button nzSize="large" type="button" class="hidden max-sm:inline-block mt-5x2"
+        nz-dropdown [nzDropdownMenu]="menuUser">
+        <img alt="User Avatar" [attr.src]="userAvatarLink" width="19px" height="19px"
+          onerror="this.src='assets/img/logo/ute_logo_c.png'">
+      </button>
+      <div class="hidden sm:inline-block">
+        <button nz-button nzType="default" type="button" class="account-btn nz-btn-red" nz-dropdown
+          [nzDropdownMenu]="menuHelp">
+          <i class="fa-solid fa-book"></i><span>{{ langData.HUONG_DAN }}</span>
+        </button>
+
+        @if (isLogin) {
+        <button nz-button nzType="default" type="button" nz-dropdown [nzDropdownMenu]="menuUserPc"
+          class="account-btn menu-item-has-children page_item_has_children">
+          <img alt="User Avatar" [attr.src]="userAvatarLink" width="19px" height="19px"
+            class="mr-5x1" onerror="this.src='assets/img/logo/ute_logo_c.png'">
+          <span>{{userName}}</span>
+        </button>
+        } @else {
+        <!-- Reg -->
+        <button nz-button nzType="default" type="button" class="account-btn nz-btn-green"
+          [routerLink]="[urlConst.ROUTE.AUTH.REGISTER]">
+          <i class="fa-solid fa-feather-alt"></i><span>{{ langData.DANG_KY}}</span>
+        </button>
+
+        <!-- Login -->
+        <button nz-button nzType="default" type="button" class="account-btn"
+          [routerLink]="[urlConst.ROUTE.AUTH.LOGIN]">
+          <i class="fa-solid fa-user-circle"></i><span>{{ langData.DANG_NHAP}}</span>
+        </button>
+        }
+
+        <!-- Language -->
+        <!-- @if (langCode === 'vi') {
+        <button nz-button type="button" class="language-btn lang-vi"
+          (click)="switchLang('en')"><span>.......</span><span>{{langCode}}</span></button>
+        } @else {
+        <button nz-button type="button" class="language-btn lang-en"
+          (click)="switchLang('vi')"><span>.......</span><span>{{langCode}}</span></button>
+        } -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<nz-dropdown-menu #menuUser="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <a href="assets/files/huong-dan.pdf" target="_blank"><span class="text-red">
+          <i class="fa-solid fa-book mr-5x1"></i>{{langData.FILE_HUONG_DAN}}
+        </span></a>
+    </li>
+    <li nz-menu-item>
+      <a href="https://youtu.be/" target="_blank"><span class="text-red">
+          <i class="fa-solid fa-video mr-5x1"></i>{{langData.VIDEO_HUONG_DAN}}
+        </span></a>
+    </li>
+    <li nz-menu-divider></li>
+    @if (!isLogin) {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.AUTH.LOGIN]">
+      <i class="fa-solid fa-user mr-5x1"></i>{{langData.DANG_NHAP}}
+    </li>
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.AUTH.REGISTER]">
+      <i class="fa-solid fa-feather-alt mr-5x1"></i>{{langData.DANG_KY}}
+    </li>
+    } @else {
+    @if (isAdmin) {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.MANAGEMENT.DASHBOARD]">
+      <i class="fa-solid fa-user-shield mr-5x1"></i>{{langData.QUAN_TRI}}
+    </li>
+    } @else {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.MAIN.MY_ACCOUNT]">
+      <i class="fa-solid fa-user-cog mr-5x1"></i>{{langData.TAI_KHOAN}}
+    </li>
+    }
+
+    <li nz-menu-divider></li>
+    <!-- <li nz-menu-item (click)="switchLang(langCode === 'vi' ? 'en' : 'vi')">
+        <i class="fa-solid fa-globe-americas mr-5x1"></i>{{langData.NGON_NGU}}: <span
+          class="uppercase">{{langCode}}</span>
+      </li>
+      <li nz-menu-divider></li> -->
+    <li nz-menu-item class="text-red" (click)="onLogOut()">
+      <i class="fa-solid fa-power-off mr-5x1"></i>{{langData.DANG_XUAT}}
+    </li>
+    }
+  </ul>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuUserPc="nzDropdownMenu">
+  <ul nz-menu>
+    @if (!isLogin) {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.AUTH.LOGIN]">
+      <i class="fa-solid fa-user mr-5x1"></i>{{langData.DANG_NHAP}}
+    </li>
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.AUTH.REGISTER]">
+      <i class="fa-solid fa-feather-alt mr-5x1"></i>{{langData.DANG_KY}}
+    </li>
+    } @else {
+    @if (isAdmin) {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.MANAGEMENT.DASHBOARD]">
+      <i class="fa-solid fa-user-shield mr-5x1"></i>{{langData.QUAN_TRI}}
+    </li>
+    } @else {
+    <li nz-menu-item [routerLink]="[urlConst.ROUTE.MAIN.MY_ACCOUNT]">
+      <i class="fa-solid fa-user-cog mr-5x1"></i>{{langData.TAI_KHOAN}}
+    </li>
+    }
+    <li nz-menu-divider></li>
+    <!-- <li nz-menu-item (click)="switchLang(langCode === 'vi' ? 'en' : 'vi')">
+      <i class="fa-solid fa-globe-americas mr-5x1"></i>{{langData.NGON_NGU}}: <span
+        class="uppercase">{{langCode}}</span>
+    </li>
+    <li nz-menu-divider></li> -->
+    <li nz-menu-item class="text-red" (click)="onLogOut()">
+      <i class="fa-solid fa-power-off mr-5x1"></i>{{langData.DANG_XUAT}}
+    </li>
+    }
+  </ul>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuHelp="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <a class="text-primary" href="assets/files/huong-dan.pdf" target="_blank"><i
+          class="fa-solid fa-book mr-5x1"></i>{{langData.FILE_HUONG_DAN}}</a>
+    </li>
+    <li nz-menu-item>
+      <a class="text-primary" href="https://youtu.be/" target="_blank"><i
+          class="fa-solid fa-video mr-5x1"></i>{{langData.VIDEO_HUONG_DAN}}</a>
+    </li>
+  </ul>
+</nz-dropdown-menu>

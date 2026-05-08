@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '';
+echo '🚨 ERROR! Click "Show Command Output" to view more infomation.';
+echo '';
+echo 'THE COMMIT NAME MUST BE IN A VALID FORMAT: "<type>: <subject>"';
+echo 'Eg: "init: login component". Read "README-DEV.md" for more info.';
+echo '';
+
+message="$(cat $1)"
+
+requiredPattern="^(add:|create:|update:|delete:|init:|fix:|test:|upgrade:|rollback:|JIRA-).*$"
+if ! [[ $message =~ $requiredPattern ]];
+then
+  echo ''
+  echo '🚨 Wrong commit message!'
+  echo 'The commit message is invalid format. Read README-DEV.md for more info.'
+  echo ''
+  exit 1
+fi

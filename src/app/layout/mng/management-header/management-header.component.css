@@ -1,0 +1,29 @@
+.avatar {
+  @apply w-[35px] h-[35px] -mt-5x1  border border-solid border-white rounded-full;
+}
+.lang-vi {
+  @apply bg-[url('../../../../assets/img/lang/vi.svg')];
+}
+.lang-en {
+  @apply bg-[url('../../../../assets/img/lang/en.svg')];
+}
+.language-btn {
+  @apply [background-position:5px] bg-[length:22px] bg-no-repeat bg-transparent text-white mr-5x2 border-0;
+}
+.language-btn span {
+  @apply opacity-0 last:opacity-100 last:uppercase;
+}
+.pull-left {
+  @apply float-left;
+}
+.pull-right {
+  @apply float-right;
+}
+.pad-left-mng-head {
+  @apply hidden;
+}
+@media only screen and (min-width: 1200px) {
+  .pad-left-mng-head {
+    @apply [display:unset] text-transparent;
+  }
+}

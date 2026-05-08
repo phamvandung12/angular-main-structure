@@ -1,0 +1,40 @@
+<app-breadcrumb [breadcrumb]="breadcrumbObj" />
+<div nz-row>
+  <div nz-col nzSpan="12">
+    <span class="text-1xl font-bold uppercase">{{breadcrumbObj.heading}}</span>
+  </div>
+  <div nz-col nzSpan="12" class="text-right">
+    <button nz-button class="nz-btn-green"><i class="fa-solid fa-plus mr-5x1"></i>Thêm mới</button>
+  </div>
+</div>
+<hr>
+
+Upload single file:<br>
+
+<app-upload-file class="w-full" [subFolderOnServer]="'test-ma-duyet-de-tai'"
+  [isUploadMultiFile]="false" [isDisableUpload]="false" [isDisableView]="false"
+  [isDownloadable]="true"
+  [listFilesPatch]="extractFileFromListId([exampleForm.get('fieldOneFile')?.value].flat())"
+  (returnedListId)="setIdFileToForm($event, 'fieldOneFile', exampleForm)" />
+
+<br><br><br>
+
+Upload multi file:<br>
+<app-upload-file class="w-full" [subFolderOnServer]="'test-ma-duyet-de-tai'"
+  [isUploadMultiFile]="true" [isDisableView]="false"
+  [listFilesPatch]="extractFileFromListId([exampleForm.get('fieldMultiFile')?.value].flat())"
+  (returnedListId)="setListIdFileToForm($event, 'fieldMultiFile', exampleForm)" />
+
+<button type="button" (click)="viewFormValue()">View form value</button>
+<button type="button" (click)="patchFormValue()">Patch form value</button>
+
+<br><br><br>
+
+CKEditor:
+<!-- <cke-editor [(ckeData)]="ckeData"></cke-editor> -->
+<cke-editor [refFormGroup]="exampleForm" [refFormControlName]="'dataCke'" />
+<br>
+Data:<br>
+@for (item of latexSvc.renderHtml(ckeData); track item) {
+<span [innerHTML]="item"></span>
+}

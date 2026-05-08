@@ -1,0 +1,38 @@
+.header-part {
+  @apply [border-bottom-style:solid] bg-white-dark mt-5x1 mb-5x4 py-5x2 border-b-lightgray-dark border-b before:absolute before:content-[""] before:w-full before:h-1 before:bg-[url("../../../../assets/img/bg/top-strip.jpg")] before:bg-repeat-x before:left-0 before:top-0;
+}
+.lang-vi {
+  @apply bg-[url("../../../../assets/img/lang/vi.svg")];
+}
+.lang-en {
+  @apply bg-[url("../../../../assets/img/lang/en.svg")];
+}
+.language-btn {
+  @apply [background-position:5px_7px] bg-[length:18px] bg-no-repeat p-5x1;
+}
+.language-btn span {
+  @apply opacity-0 last:opacity-100 last:uppercase;
+}
+button {
+  @apply mx-5x1 my-auto px-2 py-1;
+}
+button i {
+  @apply mr-5x1;
+}
+.logo-mobile {
+  @apply hidden;
+}
+@media only screen and (max-width: 768px) {
+  .hide-logo-mobile {
+    @apply hidden;
+  }
+  .logo-mobile {
+    @apply [display:unset];
+  }
+  .logo-mobile {
+    @apply w-auto max-w-[unset] h-[55px];
+  }
+}
+.logo-size {
+  @apply max-w-[234px];
+}

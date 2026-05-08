@@ -1,0 +1,12 @@
+.container {
+  @apply w-full;
+}
+.image-container > img {
+  @apply w-full;
+}
+.wait-container {
+  @apply text-center;
+}
+.wait-container h5 {
+  @apply translate-y-2.5;
+}

@@ -1,0 +1,13 @@
+<nz-breadcrumb class="mb-5x2">
+  <nz-breadcrumb-item>
+    <i class="fa-solid fa-home"></i>
+  </nz-breadcrumb-item>
+  @for (item of breadcrumb().listBreadcrumb; track item.link) {
+  <nz-breadcrumb-item>
+    <a href="javascript:void(0)" [routerLink]="[item.link]">{{item.title}}</a>
+  </nz-breadcrumb-item>
+  }
+  <nz-breadcrumb-item>
+    <span>{{breadcrumb().heading}}</span>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>

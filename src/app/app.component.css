@@ -1,0 +1,7 @@
+.go-top-icon {
+  @apply fixed text-[1.875rem] cursor-pointer text-primary p-5x2 right-0 bottom-0;
+}
+
+.blur-alert {
+  @apply fixed bottom-0 inset-x-0 w-full max-w-[300px] p-5x3 pt-0 mx-auto transition-opacity duration-1000 delay-1000;
+}

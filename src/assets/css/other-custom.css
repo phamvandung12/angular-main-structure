@@ -1,0 +1,3 @@
+hr {
+  @apply [border-top-style:solid] border-t-lightgray-dark border-t-[0.75px] border-b-0 border-x-0;
+}

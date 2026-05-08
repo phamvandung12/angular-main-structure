@@ -1,0 +1,143 @@
+<div class="file-upload-container">
+  <div class="dropzone">
+    <!--[ngClass]="isDisable ? 'disable':''"-->
+    <div class="file">
+
+      <!-- Upload -->
+      @if (!isDisableUpload() && !isStartUpload) {
+      <label class="file-label">
+        <input class="file-input" type="file" [accept]="acceptFilesExtension()"
+          (change)="uploadFile($any($event).target.files)" [multiple]="isUploadMultiFile()">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid fa-upload"></i>
+          </span>
+          <span class="file-label-sub">
+            {{ langData.CHON_TEP }}
+            {{ (listFiles && listFiles.length) > 0 ? langData.KHAC : ''}}...</span>
+        </span>
+      </label>
+      }
+
+      <!-- Upload-ING -->
+      @if (isStartUpload) {
+      <label class="file-label">
+        <span class="file-cta">
+          <span class="file-icon">
+            <img alt="Uploading" src="assets/img/other/uploading.svg" class="uploading-icon">
+          </span>
+          <span class="file-label-sub">
+            <b class="text-blue">{{ uploadingProgress }}%</b>
+            {{ uploadingProgress === 100 ? langData.DANG_HOAN_TAT : langData.DANG_TAI_LEN}}...
+          </span>
+          <span class="file-icon" (click)="onTerminateUploading()">
+            <i class="fa-solid fa-times text-red ml-5x1"></i>
+          </span>
+        </span>
+      </label>
+      }
+
+      <!-- View -->
+      @if (!isStartUpload && !isUploadMultiFile() && !isDisableView() && listFiles.length) {
+      <label class="file-label ml-5x1"
+        (click)="listFiles[0].fileInfo?.fileName ? openModalViewFile(viewFile, listFiles[0].id) : null">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid"
+              [ngClass]="listFiles[0].fileInfo?.fileName ? 'fa-eye' : 'fa-eye-slash'"></i>
+          </span>
+          <span class="file-label-sub">
+            {{langData.XEM_TRUOC}}
+            <!-- {{listFiles[0].fileInfo?.fileName}} -->
+          </span>
+        </span>
+      </label>
+      }
+
+      <!-- download -->
+      @if (!isStartUpload && isDownloadable() && !isUploadMultiFile() && listFiles.length) {
+      <label class="file-label ml-5x1"
+        (click)="listFiles[0].fileInfo?.fileName ? downloadFile(listFiles[0].id) : null">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid"
+              [ngClass]="listFiles[0].fileInfo?.fileName ? 'fa-download' : 'fa-triangle-exclamation'"></i>
+          </span>
+          <span class="file-label-sub">
+            {{langData.TAI_VE}}
+            <!-- {{listFiles[0].fileInfo?.fileName}} -->
+          </span>
+        </span>
+      </label>
+      }
+
+      <!-- no file -->
+      @if (!isUploadMultiFile() && isDisableUpload() && !listFiles.length) {
+      <label class="file-label ml-5x1">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid fa-eye-slash"></i>
+          </span>
+          <span class="file-label-sub">{{langData.CHUA_CO_TEP_TIN}}</span>
+        </span>
+      </label>
+      }
+
+      <!-- delete file no confirm -->
+      @if (!isStartUpload && !isUploadMultiFile() && deleteNoConfirm() && listFiles.length) {
+      <label class="file-label danger ml-5x1" (click)="onRemove(0)">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid fa-trash"></i>
+          </span>
+        </span>
+      </label>
+      }
+
+      <!-- delete file with confirm -->
+      @if (!isStartUpload && !isUploadMultiFile() && !deleteNoConfirm() && listFiles.length) {
+      <label class="file-label danger ml-5x1" nz-popconfirm
+        [nzPopconfirmTitle]="langData.XOA_TEP_TIN_NAY" [nzOkText]="langData.XOA"
+        [nzCancelText]="langData.HUY" [nzOkDanger]="true" (nzOnConfirm)="onRemove(0)">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa-solid fa-trash"></i>
+          </span>
+        </span>
+      </label>
+      }
+
+    </div>
+  </div>
+
+  @if (isUploadMultiFile() && listFiles.length) {
+  <div class="list-file">
+    @for (item of listFiles; track item.id; let i = $index) {
+    <div class="k-tag k-tag-indigo cursor-pointer">
+      <span (click)="isDisableView() ? (isDownloadable() ? downloadFile(item.fileInfo?.id) : null) :
+          (item.fileInfo?.fileName ? openModalViewFile(viewFile, item.id) : null)">
+        <i class="fa-solid fa-paperclip mr-5x1 text-xs"></i>
+        <i class="fa-solid mr-5x1 text-xs"
+          [ngClass]="item.fileInfo?.fileName ? 'fa-eye' : 'fa-eye-slash'"></i>
+      </span>
+      @if (!isDisableDelete()) {
+      @if (deleteNoConfirm()) {
+      <i class="fa-solid fa-trash text-red cursor-pointer text-xs mr-5x1" (click)="onRemove(i)"></i>
+      } @else {
+      <i class="fa-solid fa-trash text-red cursor-pointer text-xs mr-5x1" nz-popconfirm
+        [nzPopconfirmTitle]="langData.XOA_TEP_TIN_NAY" [nzOkText]="langData.XOA"
+        [nzCancelText]="langData.HUY" [nzOkDanger]="true" (nzOnConfirm)="onRemove(i)"></i>
+      }
+      }
+      <span (click)="isDisableView() ? (isDownloadable() ? downloadFile(item.fileInfo?.id) : null) :
+          (item.fileInfo?.fileName ? openModalViewFile(viewFile, item.id) : null)">
+        {{ item.fileInfo?.fileName }}
+      </span>
+    </div>
+    }
+  </div>
+  }
+</div>
+<ng-template #viewFile>
+  <app-view-file [fileId]="selectedFileIdForView" (hideIframe)="hideModalViewFile()" />
+</ng-template>

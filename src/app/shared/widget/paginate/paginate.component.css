@@ -1,0 +1,12 @@
+.page-input {
+  @apply w-[50px];
+}
+.pos-relative {
+  @apply relative;
+}
+.limit-description {
+  @apply ml-5x2 mr-5x1;
+}
+.limit-select {
+  @apply w-[50px] h-6 rounded-sm border-[solid] border-lightgray-dark;
+}

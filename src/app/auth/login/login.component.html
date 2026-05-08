@@ -1,0 +1,97 @@
+<div>
+  <div>
+    <h2 class="w-full text-center">{{langData.DANG_NHAP}}</h2>
+    <!-- Toolbar here -->
+  </div>
+  <div class="login-on-page">
+    <form nz-form [formGroup]="formLogin" class="center-form">
+      <nz-form-item>
+        <nz-form-control [nzValidateStatus]="displayFieldCssZorro(formLogin, 'username')">
+          <nz-input-wrapper nz-tooltip [nzTooltipTitle]="langData.EMAIL" nzTooltipPlacement="left">
+            <i class="fa-solid fa-user prefix-icon" nzInputPrefix></i>
+            <input id="frm-itm-username" type="text" class="nz-form-input" nz-input
+              formControlName="username" nzSize="large" [attr.placeholder]="langData.EMAIL"
+              (keyup.enter)="onLoginWithForm()" />
+          </nz-input-wrapper>
+          <app-field-error-display id="err-frm-itm-username"
+            [displayError]="isFieldValid(formLogin, 'username', 'required')"
+            [errorMsg]="langData.CHUA_NHAP_TEN_DANG_NHAP" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzValidateStatus]="displayFieldCssZorro(formLogin, 'password')">
+          <nz-input-password nz-tooltip [nzTooltipTitle]="langData.MAT_KHAU"
+            nzTooltipPlacement="left">
+            <i class="fa-solid fa-lock prefix-icon" nzInputPrefix></i>
+            <input id="frm-itm-password" [attr.type]="showPassLogin ? 'text' : 'password'"
+              class="nz-form-input" nz-input formControlName="password"
+              [attr.placeholder]="langData.MAT_KHAU" nzSize="large"
+              (keyup.enter)="onLoginWithForm()" />
+            <ng-template nzInputPasswordIcon>
+              <i (click)="toggleShowPassLogin()"
+                [ngClass]="showPassLogin ? 'fa-solid fa-eye-slash append-icon cursor-pointer' : 'fa-solid fa-eye append-icon cursor-pointer'"></i>
+            </ng-template>
+          </nz-input-password>
+          <app-field-error-display id="err-frm-itm-password"
+            [displayError]="isFieldValid(formLogin, 'password', 'required')"
+            [errorMsg]="langData.CHUA_NHAP_MAT_KHAU" />
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row>
+        <div nz-col [nzSpan]="12">
+          <label nzId="chkbox-remember-me" nz-checkbox formControlName="remember">
+            <span>{{ langData.GHI_NHO_DANG_NHAP}}</span>
+          </label>
+        </div>
+        <div class="text-right" nz-col [nzSpan]="12">
+          <a id="lnk-forgot-pass" (click)="isShowFogotPass=true">{{ langData.QUEN_MAT_KHAU}}</a>
+        </div>
+      </div>
+      <div nz-row nzJustify="center" class="mt-5x2">
+        <div nz-col [nzSpan]="24" class="text-center">
+          <button id="btn-login" nz-button type="button" class="cursor-pointer" [nzType]="'primary'"
+            nzSize="large" (click)="onLoginWithForm()">
+            <span>{{ langData.DANG_NHAP}}</span></button>
+        </div>
+      </div>
+      <div nz-row nzJustify="center">
+        <nz-divider nzDashed [nzText]="text">
+          <ng-template #text><span>{{langData.HOAC}}</span></ng-template>
+        </nz-divider>
+        <div nz-col [nzSpan]="24" class="text-center">
+          <nz-spin nzSize="small" [nzSpinning]="isLoadingGoogle">
+            <button id="btn-login-google" class="nz-btn-red mt-5x2" nz-button nzSize="large"
+              (click)="onLoginWithGoogle()" type="button">
+              <i class="fab fa-google mr-5x2"></i>
+              <span>{{ langData.DANG_NHAP_GOOGLE}}</span>
+            </button>
+          </nz-spin>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="isShowFogotPass" [nzTitle]="langData.QUEN_MAT_KHAU"
+  (nzOnCancel)="isShowFogotPass=false" (nzOnOk)="requestFogotPassword()"
+  [nzOkText]="langData.YEU_CAU_CAP_LAI_MAT_KHAU">
+  <ng-container *nzModalContent>
+    <form id="mdl-fogot-pass" [formGroup]="formResetPass">
+      <nz-form-item>
+        <nz-form-control [nzValidateStatus]="displayFieldCssZorro(formResetPass, 'email')">
+          <nz-input-wrapper [nzTooltipTitle]="langData.EMAIL" nzTooltipPlacement="left" nz-tooltip>
+            <i class="fa-solid fa-envelope" nzInputPrefix></i>
+            <input type="text" class="nz-form-input" nz-input formControlName="email" nzSize="large"
+              [attr.placeholder]="langData.VUI_LONG_NHAP_EMAIL" />
+          </nz-input-wrapper>
+          <app-field-error-display id="err-fogot-pass-1"
+            [displayError]="isFieldValid(formResetPass, 'email', 'required')"
+            [errorMsg]="langData.KHONG_DUOC_DE_TRONG" />
+          <app-field-error-display id="err-fogot-pass-2"
+            [displayError]="isFieldValid(formResetPass, 'email', 'invalidEmail')"
+            [errorMsg]="langData.EMAIL_KHONG_HOP_LE" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

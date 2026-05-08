@@ -1,0 +1,7 @@
+nz-breadcrumb {
+  @apply absolute font-normal tracking-[-0.5px] overflow-hidden h-[25px] -ml-5x3 top-[60px];
+}
+::ng-deep .ant-breadcrumb-separator,
+nz-breadcrumb-item * {
+  @apply text-white !important;
+}

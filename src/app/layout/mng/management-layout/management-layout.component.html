@@ -1,0 +1,18 @@
+<nz-layout class="layout">
+  <nz-sider nzCollapsible [nzCollapsedWidth]="0" nzTheme="light" [nzWidth]="sliderWidth">
+    <app-management-sidebar />
+  </nz-sider>
+  <nz-layout class="bg-layout">
+    <nz-header class="dark-header long-header">
+      <app-management-header />
+    </nz-header>
+    <nz-content class="top-box-content">
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer class="footer-layout">
+      <app-management-footer />
+    </nz-footer>
+  </nz-layout>
+</nz-layout>

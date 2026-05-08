@@ -1,0 +1,15 @@
+.footer-part {
+  @apply [border-top-style:solid] bg-white-dark mt-5x4 pt-5x4 border-t-lightgray-dark border-t;
+}
+.email-txt {
+  @apply normal-case;
+}
+.logo-bottom {
+  @apply w-full max-w-[49px] mt-5x1;
+}
+.list-no-style {
+  @apply list-none;
+}
+.anchor-no-style {
+  @apply no-underline text-[inherit];
+}

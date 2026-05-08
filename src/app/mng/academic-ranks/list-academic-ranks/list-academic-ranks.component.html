@@ -1,0 +1,58 @@
+<app-breadcrumb [breadcrumb]="breadcrumbObj" />
+<div nz-row nzGutter="16">
+  <div nz-col nzSpan="8">
+    <span class="text-1xl font-bold uppercase">{{breadcrumbObj.heading}}</span>
+  </div>
+  <div nz-col nzSpan="16" class="text-right">
+    <nz-input-search class="w-full max-w-[200px] mr-5x1" (nzSearch)="getDataPaging(true)"
+      nzAllowClear [nzEnterButton]="true">
+      <input type="text" nz-input [placeholder]="langData.TIM_KIEM" [(ngModel)]="searchValue"
+        (keyup.enter)="getDataPaging(true)" />
+    </nz-input-search>
+    <button nz-button class="nz-btn-green" (click)="openModal(formModal)">
+      <i class="fa-solid fa-plus mr-5x1"></i>{{langData.THEM_MOI}}</button>
+  </div>
+</div>
+<hr>
+<nz-table class="table-border table-cell-middle table-margin-bot" nzSize="middle"
+  nzShowPagination="false" [nzData]="listAcademicRanks.data" [nzScroll]="{x: '500px'}">
+  <thead>
+    <tr>
+      <th nzAlign="center" nzWidth="50px">{{langData.SO_THU_TU}}</th>
+      <th nzAlign="center" nzWidth="150px">{{langData.TEN_HOC_HAM}}</th>
+      <th nzAlign="center" nzWidth="100px">{{langData.TEN_VIET_TAT}}</th>
+      <th nzAlign="center" nzWidth="100px">{{langData.TRANG_THAI}}</th>
+      <th nzAlign="center" nzWidth="100px"><i class="fa-solid fa-cog"></i></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of listAcademicRanks.data; track item.id; let i = $index) {
+    <tr>
+      <td nzAlign="center">
+        {{ i + 1 + (listAcademicRanks.currentPage-1) * listAcademicRanks.limit}}
+      </td>
+      <td nzAlign="center">
+        {{ langCode === 'vi' ? item.academicRankName : item.academicRankNameEn }}
+      </td>
+      <td nzAlign="center">
+        {{ langCode === 'vi' ? item.academicRankAbbreviation : item.academicRankAbbreviationEn }}
+      </td>
+      <td nzAlign="center">
+        <nz-switch class="switcher-on-green switcher-off-red" [(ngModel)]="item.status"
+          [nzLoading]="selectedSwitcherId === item.id" [nzControl]="true"
+          (click)="changeStatus(item.id)" nzCheckedChildren="ON"
+          nzUnCheckedChildren="OFF"></nz-switch>
+      </td>
+      <td nzAlign="center">
+        <button nz-button nzType="primary" type="button" nzSize="small"
+          (click)="openModal(formModal, item)"><i class="fa-solid fa-edit"></i></button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</nz-table>
+<app-table-paginate [pageConfig]="listAcademicRanks" (pageChange)="pageChange($event)" />
+
+<ng-template #formModal>
+  <app-form-academic-ranks [modalData]="modalData" (closeModal)="closeModal($event)" />
+</ng-template>

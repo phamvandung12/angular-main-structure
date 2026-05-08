@@ -1,0 +1,25 @@
+/* Drag Drop */
+tr.cdk-drag {
+  @apply bg-white;
+}
+
+.cdk-drag-preview {
+  @apply box-border rounded shadow-[0_5px_5px_-3px_rgba(0,0,0,0.2),0_8px_10px_1px_rgba(0,0,0,0.14),0_3px_14px_2px_rgba(0,0,0,0.12)];
+}
+
+.cdk-drag-placeholder {
+  @apply opacity-0;
+}
+
+.cdk-drag-animating {
+  @apply duration-200 ease-out delay-0 transition-transform;
+}
+
+.example-box:last-child {
+  @apply border-0;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  @apply duration-200 ease-out delay-0 transition-transform;
+}
+/* End Drag Drop */

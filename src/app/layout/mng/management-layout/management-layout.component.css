@@ -1,0 +1,41 @@
+.layout {
+  @apply min-h-screen;
+}
+.bg-layout {
+  @apply [background:url("../../../../assets/img/bg/bg-pattern.png")];
+}
+nz-header {
+  @apply bg-white px-5x4 py-0;
+}
+nz-content {
+  @apply pt-6 pb-0 px-4;
+}
+.inner-content {
+  @apply bg-white min-h-[300px] p-4;
+}
+nz-footer {
+  @apply text-center px-[50px] py-2 bg-white-dark;
+}
+.dark-header {
+  @apply bg-primary text-white;
+}
+.long-header {
+  @apply h-[300px] pl-10;
+}
+.top-box-content {
+  @apply mt-[-230px];
+}
+@media only screen and (min-width: 1200px) {
+  .long-header {
+    @apply pl-5x4;
+  }
+}
+
+/* {
+   xs: '575px',
+   sm: '576px',
+   md: '768px',
+   lg: '992px',
+   xl: '1200px', current sider nzBreakpoint
+   xxl: '1600px'
+} */

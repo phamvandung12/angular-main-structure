@@ -1,0 +1,68 @@
+<form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+  <div nz-row class="pb-2.5">
+    <div nz-col nzSpan="24">
+      <label>{{langData.TEN_HOC_HAM_VN}}</label>
+      <label class="field-required"><sup><i class="fa-solid fa-star-of-life"></i></sup></label>
+    </div>
+    <div nz-col nzSpan="24">
+      <input nz-input formControlName="academicRankName"
+        [nzStatus]="displayFieldCssZorro(form, 'academicRankName')">
+      <app-field-error-display [displayError]="isFieldValid(form, 'academicRankName', 'required')"
+        [errorMsg]="langData.KHONG_DUOC_DE_TRONG" />
+    </div>
+  </div>
+
+  <div nz-row class="pb-2.5">
+    <div nz-col nzSpan="24">
+      <label>{{langData.TEN_HOC_HAM_EN}}</label>
+      <label class="field-required"><sup><i class="fa-solid fa-star-of-life"></i></sup></label>
+    </div>
+    <div nz-col nzSpan="24">
+      <input nz-input formControlName="academicRankNameEn"
+        [nzStatus]="displayFieldCssZorro(form, 'academicRankNameEn')">
+      <app-field-error-display [displayError]="isFieldValid(form, 'academicRankNameEn', 'required')"
+        [errorMsg]="langData.KHONG_DUOC_DE_TRONG" />
+    </div>
+  </div>
+
+  <div nz-row class="pb-2.5">
+    <div nz-col nzSpan="24">
+      <label>{{langData.TEN_VIET_TAT_VN}}</label>
+      <label class="field-required"><sup><i class="fa-solid fa-star-of-life"></i></sup></label>
+    </div>
+    <div nz-col nzSpan="24">
+      <input nz-input formControlName="academicRankAbbreviation"
+        [nzStatus]="displayFieldCssZorro(form, 'academicRankAbbreviation')">
+      <app-field-error-display
+        [displayError]="isFieldValid(form, 'academicRankAbbreviation', 'required')"
+        [errorMsg]="langData.KHONG_DUOC_DE_TRONG" />
+    </div>
+  </div>
+
+  <div nz-row class="pb-2.5">
+    <div nz-col nzSpan="24">
+      <label>{{langData.TEN_VIET_TAT_EN}}</label>
+      <label class="field-required"><sup><i class="fa-solid fa-star-of-life"></i></sup></label>
+    </div>
+    <div nz-col nzSpan="24">
+      <input nz-input formControlName="academicRankAbbreviationEn"
+        [nzStatus]="displayFieldCssZorro(form, 'academicRankAbbreviationEn')">
+      <app-field-error-display
+        [displayError]="isFieldValid(form, 'academicRankAbbreviationEn', 'required')"
+        [errorMsg]="langData.KHONG_DUOC_DE_TRONG" />
+    </div>
+  </div>
+
+  <div nz-row class="ant-modal-footer fk-modal-footer">
+    <div nz-col nzSpan="24" class="ali-right">
+      <div class="pl-2.5 footer-btn">
+        <button nz-button nzType="default" nzSize="default" type="button" class="nz-btn-red"
+          (click)="onCancel()"><i class="fa-solid fa-times mr-5x1"></i>{{langData.HUY}}</button>
+      </div>
+      <div class="pl-2.5 footer-btn">
+        <button nz-button nzType="primary" nzSize="default" type="button" (click)="onSubmit()"><i
+            class="fa-solid fa-save mr-5x1"></i>{{langData.LUU}}</button>
+      </div>
+    </div>
+  </div>
+</form>

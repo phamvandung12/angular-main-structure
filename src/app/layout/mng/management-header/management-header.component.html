@@ -1,0 +1,26 @@
+<div class="pull-left">
+  <b class="uppercase hidden sm:block"><span class="pad-left-mng-head">__</span>
+    {{langData.HE_THONG_QUAN_TRI}}</b>
+</div>
+<div class="pull-right">
+  @if (langCode === 'vi') {
+  <button nz-button nzType="default" type="button" nzSize="small" class="language-btn lang-vi"
+    (click)="switchLang('en')"><span>.........</span><span>{{langCode}}</span></button>
+  } @else {
+  <button nz-button nzType="default" type="button" nzSize="small" class="language-btn lang-en"
+    (click)="switchLang('vi')"
+    nzPopconfirmPlacement="bottomRight"><span>.........</span><span>{{langCode}}</span></button>
+  }
+  <img alt="User Avatar" [attr.src]="avatarOfUser ? avatarOfUser : 'assets/img/other/user.png'"
+    onerror="this.src='assets/img/other/user.png'" class="avatar cursor-pointer" nz-dropdown
+    [nzDropdownMenu]="menuUser">
+  <nz-dropdown-menu #menuUser="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item [routerLink]="[urlConst.ROUTE.MANAGEMENT.ADMIN_PROFILE]"><i
+          class="fa-solid fa-user mr-5x1"></i>{{langData.THONG_TIN_CA_NHAN}}</li>
+      <li nz-menu-divider></li>
+      <li nz-menu-item class="text-red" (click)="doLogout()"><i
+          class="fa-solid fa-power-off mr-5x1"></i>{{langData.DANG_XUAT}}</li>
+    </ul>
+  </nz-dropdown-menu>
+</div>

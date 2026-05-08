@@ -1,0 +1,76 @@
+let re = '';
+let defaultComp = {
+  'AppModule': 'Module gốc',
+  'AppRoutingModule': 'Cài đặt định tuyến gốc',
+  'AuthRoutingModule': 'Cài đặt định tuyến truy cập hệ thống',
+  'MainRoutingModule': 'Cài đặt định tuyến trang người dùng',
+  'ManagementRoutingModule': 'Cài đặt định tuyến trang quản trị',
+  'AppComponent': 'Component gốc, kèm chức năng cập nhật phần mềm',
+  'AuthModule': 'Đăng nhập hệ thống',
+  'LoginComponent': 'Đăng nhập hệ thống',
+  'BreadcrumbModule': 'Hỗ trợ xác định vị trí trong sitemap',
+  'BreadcrumbComponent': 'Hỗ trợ xác định vị trí trong sitemap',
+  'CategoriesModule': 'Module quản lý danh mục',
+  'CoreModule': 'Module các chức năng cốt lõi',
+  'DirectiveUserModule': 'Chức năng hỗ trợ khác',
+  'FieldErrorDisplayModule': 'Hỗ trợ đánh dấu các trường bị lỗi xác thực dữ liệu',
+  'FieldErrorDisplayComponent': 'Hỗ trợ đánh dấu các trường bị lỗi xác thực dữ liệu',
+  'MainLayoutModule': 'Khung giao diện',
+  'MainHeaderComponent': 'Header',
+  'MainFooterComponent': 'Footer',
+  'MainLayoutComponent': 'Layout bố cục',
+  'MainModule': 'Module các trang cho người dùng',
+  'ManagementLayoutModule': 'Khung giao diện',
+  'ManagementHeaderComponent': 'Header',
+  'ManagementFooterComponent': 'Footer',
+  'ManagementSidebarComponent': 'Sidebar',
+  'ManagementLayoutComponent': 'Layout bố trí',
+  'ManagementModule': 'Module các trang quản trị',
+  'PaginateModule': 'Hỗ trợ phân trang',
+  'TablePaginateComponent': 'Hỗ trợ phân trang cho bảng dữ liệu',
+  'PipeUserModule': 'Hỗ trợ chuyển đổi dữ liệu',
+  'SettingsModule': 'Cài đặt hệ thống',
+  'FormSettingsComponent': 'Cài đặt hệ thống',
+  'ListSettingsComponent': 'Cài đặt hệ thống',
+  'UpAndViewFileModule': 'Hỗ trợ upload và xem file',
+  'UploadFileComponent': 'Hỗ trợ upload file',
+  'ViewFileComponent': 'Hỗ trợ xem file',
+  'WidgetModule': 'Module các thành phần hỗ trợ',
+  'PluginsModule': 'Module các phần bổ trợ',
+  'PluginModule': 'Module các phần bổ trợ',
+  'SharedModule': 'Module các component dùng chung',
+  'ComponentSharedModule': 'Module các component dùng chung',
+  'AdminLayoutComponent': 'Khung giao diện',
+  'AppComponent': 'Component gốc, kèm chức năng cập nhật phần mềm',
+  'AuthLayoutComponent': 'Khung giao diện',
+  'UserLayoutComponent': 'Khung giao diện',
+  'LayoutModule': 'Khung giao diện',
+  'FooterComponent': 'Footer dùng chung',
+  'HeaderComponent': 'Header dùng chung',
+  'SidebarComponent': 'Menu sidebar',
+};
+for (let btn of document.getElementsByClassName('container-fluid modules')[0].getElementsByClassName('row')[0].getElementsByTagName('footer')) {
+  let linkModule = btn.getElementsByTagName('a')[0].getAttribute('href').replace('./', 'http://localhost:8080/');
+  re += await new Promise(resolve => {
+    fetch(linkModule).then(res => res.text())
+      .then(html => {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(html, "text/html");
+
+        let a = `Module\t${doc.getElementsByClassName('breadcrumb')[0].getElementsByTagName('li')[1].getInnerHTML()}\t${defaultComp[doc.getElementsByClassName('breadcrumb')[0].getElementsByTagName('li')[1].getInnerHTML()] ?? ''}\t${linkModule}\n`;
+
+        if (doc.getElementsByClassName('list-group').length) {
+          for (let li of doc.getElementsByClassName('list-group')[0].getElementsByTagName('li')) {
+            let compName = li.getElementsByTagName('a')[0].getInnerHTML();
+            if (/.*Component$/.test(compName)) {
+              a += `Component\t${li.getElementsByTagName('a')[0].getInnerHTML()}\t${defaultComp[li.getElementsByTagName('a')[0].getInnerHTML()] ?? ''}\t${li.getElementsByTagName('a')[0].getAttribute('href').replace('../', 'http://localhost:8080/')}\n`;
+            }
+          }
+        }
+        resolve(a);
+      });
+  });
+}
+
+// Wait console return value, then run:
+//copy(re)

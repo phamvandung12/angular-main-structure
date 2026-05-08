@@ -1,0 +1,28 @@
+<ngx-spinner bdColor="rgba(255,255,255,.8)"
+  template="<img src='assets/img/other/loading.svg' />" />
+<!--
+  <ngx-spinner type="ball-newton-cradle"></ngx-spinner>
+  Add to angular.json: "node_modules/ngx-spinner/animations/ball-newton-cradle.css",
+-->
+<nz-alert [ngStyle]="{ opacity: onlineStt ? 0 : 0.9, zIndex: onlineStt ? -1 : 99999 }"
+  class="blur-alert" [nzType]="onlineStt ? 'info' : 'error'" [nzMessage]="offlineMsg"
+  [nzShowIcon]="false" [nzCloseable]="false" />
+
+<router-outlet />
+
+<i class="fa-solid fa-circle-chevron-up go-top-icon" (click)="goTop()"></i>
+
+<ng-template #offlineMsg>
+  <div class="w-full text-center">
+    @if (onlineStt) {
+    <span>
+      <i nz-icon nzType="check-circle" class="mr-5x1 text-blue"></i> {{ langData['DA_KET_NOI'] }}
+    </span>
+    } @else {
+    <span>
+      <i nz-icon nzType="loading" [nzSpin]="true" class="mr-5x1 text-blue"></i> {{
+      langData['MAT_KET_NOI'] }}
+    </span>
+    }
+  </div>
+</ng-template>

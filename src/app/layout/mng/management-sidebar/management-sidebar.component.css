@@ -1,0 +1,47 @@
+.logo {
+  @apply h-16 [background:#ffffff33] p-4;
+  @apply bg-primary;
+}
+.logo-img {
+  @apply h-5 mr-5x1 -mt-5x1;
+}
+.logo-text-font {
+  @apply text-2xl;
+}
+.logo-front {
+  @apply h-[200px];
+}
+
+::ng-deep .ant-layout-sider-zero-width-trigger {
+  @apply h-16 leading-[64px] top-0;
+  @apply bg-transparent text-white !important;
+}
+
+.avatar-user {
+  @apply mb-5x2;
+}
+
+.avatar-img {
+  @apply w-[86px] h-[86px] mt-5x4 mb-5x2 rounded-full border-solid border-2 border-white;
+}
+
+.avatar-name {
+  @apply text-1xs font-bold uppercase;
+}
+
+/* Menu */
+.menu-alone,
+.sub-menu ::ng-deep .ant-menu-submenu-title {
+  @apply text-[0.84375rem] font-bold tracking-[-0.7px] h-8 leading-8;
+  @apply pl-3 pr-5x4 mx-auto my-0 bg-primary-light-2x !important;
+}
+
+/* Menu sub */
+.sub-menu ::ng-deep .ant-menu-sub li {
+  @apply text-[0.84375rem] tracking-[-0.5px] h-8 leading-8 m-0;
+  @apply px-4 !important;
+}
+
+::ng-deep .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  @apply right-2.5;
+}

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '';
+echo '🚨 ERROR! Click "Show Command Output" to view more infomation.';
+echo '';
+echo 'ALL FILES MUST BE PASSED LINTING BEFORE COMMIT';
+echo 'For fast fix some lint issues, run: ng lint --fix';
+
+node node_modules/@angular/cli/bin/ng lint;

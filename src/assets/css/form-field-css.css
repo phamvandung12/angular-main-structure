@@ -1,0 +1,39 @@
+.has-error,
+.has-error input {
+  @apply text-red border-red shadow-[inset_0_1px_1px_rgba(0,0,0,0.075)];
+}
+
+.has-error input:focus {
+  @apply border-red-dark shadow-[inset_0_1px_1px_rgba(0,0,0,0.075),0_0_6px_#ce8483];
+}
+
+.center-form {
+  @apply w-full max-w-[450px];
+}
+.form-on-page {
+  @apply flex justify-center;
+}
+.ant-form-item {
+  @apply mb-5x3;
+}
+.nz-form-input {
+  @apply h-[35px] text-[0.9375rem];
+}
+.prefix-icon {
+  @apply text-[1rem] mr-5x1 mt-5x1;
+}
+.append-icon {
+  @apply text-[1rem] mt-5x1;
+}
+.ant-divider-horizontal.ant-divider-with-text::before,
+.ant-divider-horizontal.ant-divider-with-text::after {
+  @apply [transform:unset];
+}
+
+.field-required {
+  @apply text-red ml-[3px];
+}
+
+.field-required i {
+  @apply text-[0.5rem];
+}

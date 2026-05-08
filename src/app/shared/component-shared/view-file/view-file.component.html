@@ -1,0 +1,69 @@
+<h4>{{langData.XEM_TRUOC}} {{localViewer === 'imageViewer' ? langData.ANH : ''}}</h4>
+<div class="modal-body">
+  <div class="container-view-file">
+    @if (fileId()) {
+    <div class="toolbar">
+      <!-- <div class="toolbar-left">
+          <button type="button" class="btn btn-default btn-animation" (click)="hide()">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div> -->
+      <!-- <div class="toolbar-right">
+          <button type="button" class="btn btn-default btn-animation">
+            <i class="fa-solid fa-cloud-download-alt"></i>
+          </button>
+          <button type="button" class="btn btn-default btn-animation">
+            <i class="fa-solid fa-ellipsis-v"></i>
+          </button>
+        </div> -->
+    </div>
+    }
+    <div class="vertical-center">
+      <div class="container">
+        <div class="file-container">
+          @switch (localViewer) {
+          @case ('pdfViewer') {
+          <div class="pdf-container">
+            <ngx-extended-pdf-viewer [src]="pdfBlob" [showOpenFileButton]="false"
+              [showUnverifiedSignatures]="true" height="90vh"></ngx-extended-pdf-viewer>
+          </div>
+          }
+          @case ('officeViewer') {
+          <div class="office-container text-center">
+            <!-- ngx-doc-viewer -->
+            <h4>{{langData.FILE_KHONG_HO_TRO_XEM}}</h4>
+            <button nz-button nzType="primary" type="button"
+              (click)="downloadUnsupportedViewFile()">{{langData.TAI_VE}}</button>
+          </div>
+          }
+          @case ('imageViewer') {
+          <div class="image-container">
+            <img alt="Viewing file" [src]="safeResourceUrl" (click)="rotateImage()" id="image"
+              (load)="getImgSize()">
+          </div>
+          }
+          @case ('unsupportViewer') {
+          <div class="wait-container">
+            <h4>{{langData.FILE_KHONG_HO_TRO_XEM}}</h4>
+            <button nz-button nzType="primary" type="button"
+              (click)="downloadUnsupportedViewFile()">{{langData.TAI_VE}}</button>
+          </div>
+          }
+          @case ('') {
+          <div class="wait-container">
+            <h5>{{langData.DANG_TAI}}</h5>
+          </div>
+          }
+          @default {
+          <div class="wait-container">
+            <h4>{{langData.FILE_KHONG_HO_TRO_XEM}}</h4>
+            <button nz-button nzType="primary" type="button"
+              (click)="downloadUnsupportedViewFile()">{{langData.TAI_VE}}</button>
+          </div>
+          }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

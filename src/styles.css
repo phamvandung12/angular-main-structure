@@ -1,0 +1,80 @@
+/* TailwindCss */
+@import "./assets/css/tailwind.css";
+
+/* Theme's font */
+@import "./assets/css/font-face.css";
+
+/* Nz-Btn Custom color */
+@import "./assets/css/nz-btn-custom.css";
+
+/* Nz-Modal custom */
+@import "./assets/css/nz-modal-custom.css";
+
+/* Nz-table custom */
+@import "./assets/css/nz-table-custom.css";
+
+/* Drag Drop */
+@import "./assets/css/drag-drop.css";
+
+/* Form field */
+@import "./assets/css/form-field-css.css";
+
+/* Other custom */
+@import "./assets/css/other-custom.css";
+
+html {
+  @apply scroll-smooth [--antd-wave-shadow-color:#2e3192];
+  /* --antd-wave-shadow-color: #00796b; */
+}
+
+body {
+  @apply overflow-x-hidden;
+}
+
+* {
+  @apply font-base text-base font-normal tracking-[-0.9px];
+}
+
+/* Hide spin up / down button of input number */
+input[type="number"].hide-spin-up-down::-webkit-inner-spin-button,
+input[type="number"].hide-spin-up-down::-webkit-outer-spin-button {
+  @apply [-webkit-appearance:none] m-0;
+}
+/* END Hide spin up / down button of input number */
+
+
+/* Global CkEditor 5 */
+/* CkE Default */
+.ck-editor__editable_inline {
+  @apply min-h-[100px] max-h-[500px] overflow-scroll;
+}
+
+/* CkE Default */
+.cke-h50px .ck-editor__editable_inline {
+  @apply min-h-[50px] !important;
+}
+
+/* CkE Default */
+.cke-h200px .ck-editor__editable_inline {
+  @apply min-h-[200px] !important;
+}
+
+.ck-balloon-panel {
+  @apply z-[2000] !important;
+}
+/* End Global CkEditor 5 */
+
+la-tex {
+  @apply tracking-normal;
+}
+
+/* Toast custom */
+.toast-top-center-fw {
+  top: 0;
+  width: 100%;
+}
+
+.toast-top-center-fw .ngx-toastr {
+  width: 100%;
+}
+/* End Toast custom */

@@ -1,0 +1,68 @@
+/* Global NzButton Color */
+.nz-btn-green {
+  @apply border-green bg-green text-white;
+}
+
+.nz-btn-green:not([disabled]):hover,
+.nz-btn-green:not([disabled]):focus {
+  @apply border-green-dark bg-green-dark text-white;
+}
+
+.nz-btn-red {
+  @apply border-red bg-red text-white;
+}
+
+.nz-btn-red:not([disabled]):hover,
+.nz-btn-red:not([disabled]):focus {
+  @apply border-red-dark bg-red-dark text-white;
+}
+
+.nz-btn-blue {
+  @apply border-blue bg-blue text-white;
+}
+
+.nz-btn-blue:not([disabled]):hover,
+.nz-btn-blue:not([disabled]):focus {
+  @apply border-blue-dark bg-blue-dark text-white;
+}
+
+.nz-btn-orange {
+  @apply border-orange bg-orange text-white;
+}
+
+.nz-btn-orange:not([disabled]):hover,
+.nz-btn-orange:not([disabled]):focus {
+  @apply border-orange-dark bg-orange-dark text-white;
+}
+
+.nz-btn-purple {
+  @apply border-purple bg-purple text-white;
+}
+
+.nz-btn-purple:not([disabled]):hover,
+.nz-btn-purple:not([disabled]):focus {
+  @apply border-purple-dark bg-purple-dark text-white;
+}
+
+.nz-btn-gray {
+  @apply border-gray bg-gray text-white;
+}
+
+.nz-btn-gray:not([disabled]):hover,
+.nz-btn-gray:not([disabled]):focus {
+  @apply border-gray-dark bg-gray-dark text-white;
+}
+
+/* End Global NzButton Color */
+
+/* Global NzSwitcher Color */
+/* OFF switcher must declair before ON switcher */
+.switcher-off-red .ant-switch {
+  @apply bg-red-dark;
+}
+
+.switcher-on-green .ant-switch-checked {
+  @apply bg-green-dark;
+}
+
+/* End Global NzSwitcher Color */
